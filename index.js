@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const {Server} = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3002", // Allow requests from this origin and my frontend port = 3002
+        origin: "http://localhost:3001", // Allow requests from this origin and my frontend port = 3001
         methods: ["GET", "POST"], // Allow these HTTP methods
     },
 });
@@ -19,10 +19,16 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log("User connected ", socket.id); // Log the socket ID of the connected user
 
+    socket.on("join_room", (data) => {
+        const {room} = data; // Data sent from client when join_room event emitted
+        socket.join(room); // Join the user to a socket room
+    });
+
     // Listen for "send_message" events from the connected client
     socket.on("send_message", (data) => {
         // Emit the received message data to all connected clients
-        socket.broadcast.emit("receive_message", data);
+        const {chatInput, room} = data;
+        socket.to(room).emit("receive_message", chatInput);
     });
 });
 
