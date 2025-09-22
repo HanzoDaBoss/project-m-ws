@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const {Server} = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000", // Allow requests from this origin and my frontend port = 3001
+        origin: ["http://localhost:3000", "https://project-m-three.vercel.app"], // Allow requests from this origin and my frontend port = 3001
         methods: ["GET", "POST"], // Allow these HTTP methods
     },
 });
