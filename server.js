@@ -1,17 +1,20 @@
 const express = require("express");
 const cors = require("cors");
-const https = require("https");
+const http = require("http");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 const {Server} = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://project-m-three.vercel.app"], // Allow requests from this origin and my frontend port = 3001
+        origin: [
+            "http://localhost:3000",
+            "https://project-m-three.vercel.app/",
+        ], // Allow requests from this origin and my frontend port = 3001
         methods: ["GET", "POST"], // Allow these HTTP methods
     },
 });
