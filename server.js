@@ -14,6 +14,7 @@ const io = new Server(server, {
         origin: [
             "http://localhost:3000",
             "https://project-m-three.vercel.app/",
+            "https://project-m-hanif-uddins-projects.vercel.app",
         ], // Allow requests from this origin and my frontend port = 3001
         methods: ["GET", "POST"], // Allow these HTTP methods
     },
