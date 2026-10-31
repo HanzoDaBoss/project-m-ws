@@ -27,10 +27,15 @@ io.on("connection", (socket) => {
     // Listen for "send_message" events from the connected client
     socket.on("send_message", (data) => {
         // Emit the received message data to all connected clients
-        const {senderId, body, senderNickname, room} = data;
+        const {senderId, body, senderNickname, senderGender, room} = data;
         socket
             .to(room)
-            .emit("receive_message", {senderId, body, senderNickname});
+            .emit("receive_message", {
+                senderId,
+                body,
+                senderNickname,
+                senderGender,
+            });
     });
 });
 
