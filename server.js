@@ -11,7 +11,11 @@ const server = http.createServer(app);
 const {Server} = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://project-m-three.vercel.app"], // Allow requests from this origin and my frontend port = 3000
+        origin: [
+            "http://localhost:3000",
+            "https://project-m-three.vercel.app",
+            " https://scratch-cuddle-submarine.ngrok-free.dev",
+        ], // Allow requests from this origin and my frontend port = 3000
         methods: ["GET", "POST"], // Allow these HTTP methods
     },
 });
@@ -28,14 +32,12 @@ io.on("connection", (socket) => {
     socket.on("send_message", (data) => {
         // Emit the received message data to all connected clients
         const {senderId, body, senderNickname, senderGender, room} = data;
-        socket
-            .to(room)
-            .emit("receive_message", {
-                senderId,
-                body,
-                senderNickname,
-                senderGender,
-            });
+        socket.to(room).emit("receive_message", {
+            senderId,
+            body,
+            senderNickname,
+            senderGender,
+        });
     });
 });
 
