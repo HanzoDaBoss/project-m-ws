@@ -14,7 +14,7 @@ const io = new Server(server, {
         origin: [
             "http://localhost:3000",
             "https://project-m-three.vercel.app",
-            " https://scratch-cuddle-submarine.ngrok-free.dev",
+            "https://scratch-cuddle-submarine.ngrok-free.dev",
         ], // Allow requests from this origin and my frontend port = 3000
         methods: ["GET", "POST"], // Allow these HTTP methods
     },
